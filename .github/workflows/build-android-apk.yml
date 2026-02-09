@@ -79,7 +79,7 @@ jobs:
         with:
           name: app-release-${{ github.event.inputs.build_id }}
           path: |
-            **/build/outputs/apk/release/*.apk
+            **/build/outputs/apk/**/release/*.apk
           retention-days: 7
 
       - name: Notify build completion
