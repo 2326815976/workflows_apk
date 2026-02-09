@@ -67,8 +67,12 @@ jobs:
             -Pandroid.injected.signing.key.password=$KEY_PASSWORD \
             --no-daemon --stacktrace
 
-          # 查找生成的 APK
-          find . -name "*.apk" -type f
+          # 查找生成的 APK 并显示完整路径
+          echo "Searching for generated APK files:"
+          find . -name "*.apk" -type f -exec ls -lh {} \;
+
+          # 返回到工作目录根目录
+          cd /home/runner/work/workflows_apk/workflows_apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
