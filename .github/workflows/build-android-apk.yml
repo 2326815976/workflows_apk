@@ -46,8 +46,8 @@ jobs:
           echo "Found gradlew in: $GRADLE_DIR"
           cd "$GRADLE_DIR"
 
-          # 构建 Release APK
-          ./gradlew assembleRelease --no-daemon --stacktrace
+          # 构建 Debug APK（不需要签名密钥）
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
           # 查找生成的 APK
           find . -name "*.apk" -type f
