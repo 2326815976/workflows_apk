@@ -42,15 +42,18 @@ jobs:
       - name: Decode and setup keystore
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
-          echo "Keystore file created"
+          echo "Keystore file created at: $(pwd)/keystore.jks"
 
       - name: Build Release APK with Gradle
         env:
-          KEYSTORE_FILE: ../keystore.jks
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
+          # 保存 keystore 绝对路径
+          KEYSTORE_FILE="$(pwd)/keystore.jks"
+          echo "Keystore absolute path: $KEYSTORE_FILE"
+
           # 查找 gradlew 文件位置
           GRADLE_DIR=$(find . -name "gradlew" -type f | head -n 1 | xargs dirname)
           echo "Found gradlew in: $GRADLE_DIR"
